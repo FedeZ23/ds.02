@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings AirBnb 2024 - Buenos Aires</title>
+</head>
+<body>
+<div class="header">
+    <div class="header-title">Especialización en Data Science</div>
+    <div class="header-subtitle">Profesor: Lic. Ariel Aizemberg</div>
+    <ul class="header-list">
+        <li><b>Alumnos:</b></li>
+        <li>Federico Jose Zarategui</li>
+        <li>Lic. Horacio Agustin Bruno Touzon</li>
+    </ul>
+</div>
+    <h1>AirBnb</h1>
+    <p>Bienvenido al análisis de datos de AirBnb en Buenos Aires para el año 2024. Este dashboard interactivo proporciona información detallada sobre las tendencias de alojamientos, precios y más.</p>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Dataset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #003366;
+            border-bottom: 2px solid #003366;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background-color: #f0f8ff;
+            padding: 5px;
+            border-left: 5px solid #003366;
+            margin: 10px 0;
+        }
+
+        .important {
+            color: #cc0000;
+            font-weight: bold;
+        }
+
+        .tabulated {
+            margin-left: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 40px;
+        }
+
+        .observations {
+            background-color: #fef5e7;
+            padding: 10px;
+            border: 1px solid #ffa500;
+            border-radius: 5px;
+        }
+        .chart-description {
+            margin-top: 10px;
+            font-style: italic;
+            color: #333;
+        }
+        .questions {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .question-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+
+        .question-list {
+            list-style-type: decimal;
+            margin-left: 30px;
+        }
+
+        .question-list li {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .question-list li::marker {
+            color: #cc0000;
+        }
+      /* Resaltar palabras clave dentro de las preguntas */
+        .question-key {
+            font-weight: bold;
+            color: #003366;
+        }
+
+    /* Ajustes responsivos para pantallas más pequeñas */
+    @media (max-width: 600px) {
+        .questions {
+            padding: 15px;
+        }
+
+        .question-title {
+            font-size: 1.3em;
+        }
+
+        .question-list li {
+            font-size: 1em;
+        }
+    }
+     /* Estilo para la sección de conclusiones */
+.conclusions {
+    background-color: #f4f9fc;
+    border: 2px solid #005a9c;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 12px;
+    color: #002a4d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.conclusions-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #005a9c;
+}
+
+.conclusions-list {
+    list-style-type: square;
+    margin-left: 50px;
+}
+
+.conclusions-list li {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.conclusions-footer {
+    margin-top: 20px;
+    font-style: italic;
+    text-align: center;
+    font-size: 1.1em;
+    color: #005a9c;
+}
+/* Estilo para la cabecera de la página */
+.header {
+    background-color: #005a9c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.header-subtitle {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.header-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.header-list li {
+    margin-top: 5px;
+}
+
+/* Estilo para la sección de hallazgos */
+.hallazgos {
+    background-color: #f7f9fc;
+    border: 2px solid #007acc;
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 10px;
+    color: #003366;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hallazgos-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #005a9c;
+}
+
+.hallazgos-item {
+    margin-bottom: 20px;
+}
+
+.hallazgos-item-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #002a4d;
+    margin-bottom: 5px;
+}
+
+.hallazgos-item-content {
+    margin-left: 15px;
+    font-size: 1.1em;
+}
+
+      
+    </style>
+</head>
+<body>
+
+    <h1 class="section-title">Análisis Exploratorio de Datos (EDA)</h1>
+    <p class="highlight">El dataset contiene <span class="important">35,443 filas</span> y <span class="important">18 columnas</span>. A continuación, se presenta un resumen inicial:</p>
+
+    <h2 class="section-title">Columnas Principales</h2>
+    <ul>
+        <li><b>id:</b> Identificador único del listado.</li>
+        <li><b>name:</b> Nombre del listado.</li>
+        <li><b>host_id</b> y <b>host_name:</b> Identificadores y nombres de los anfitriones.</li>
+        <li><b>neighbourhood:</b> Barrio en el que está ubicado el alojamiento.</li>
+        <li><b>latitude</b> y <b>longitude:</b> Coordenadas de ubicación.</li>
+        <li><b>room_type:</b> Tipo de habitación (por ejemplo, Entire home/apt, Private room).</li>
+        <li><b>price:</b> Precio por noche (<span class="important">algunos valores faltantes</span>).</li>
+        <li><b>minimum_nights:</b> Noches mínimas de estadía.</li>
+        <li><b>number_of_reviews:</b> Número total de reseñas.</li>
+        <li><b>last_review:</b> Fecha de la última reseña (<span class="important">valores faltantes</span>).</li>
+        <li><b>reviews_per_month:</b> Promedio de reseñas por mes.</li>
+        <li><b>availability_365:</b> Días disponibles en un año.</li>
+        <li><b>license:</b> Licencia del alojamiento (<span class="important">mayoría de valores faltantes</span>).</li>
+    </ul>
+
+    <h2 class="section-title">Observaciones Importantes</h2>
+    <div class="observations">
+        <h3>Faltantes:</h3>
+        <ul>
+            <li><b>price:</b> Tiene datos faltantes (~10%).</li>
+            <li><b>last_review</b> y <b>reviews_per_month:</b> También tienen valores ausentes.</li>
+            <li><b>neighbourhood_group:</b> Está completamente vacío.</li>
+            <li><b>license:</b> Tiene muy pocos registros (~1%).</li>
+        </ul>
+
+        <h3>Variables Clave:</h3>
+        <ul>
+            <li><b>price:</b> Muestra valores altos y outliers significativos (promedio ≈ 92,326, pero con valores máximos superiores a 10 millones).</li>
+        </ul>
+
+        <h3>Variables Geográficas:</h3>
+        <ul>
+            <li><b>latitude</b> y <b>longitude:</b> Permiten crear mapas interactivos.</li>
+        </ul>
+
+        <h3>Categorías:</h3>
+        <ul>
+            <li><b>neighbourhood:</b> Útil para segmentaciones por barrio.</li>
+            <li><b>room_type:</b> Ayuda a categorizar listados por tipo de alojamiento.</li>
+        </ul>
+    </div>
+    <div class='tableauPlaceholder' id='viz1734565267680' style='position: relative'>
+        <noscript>
+            <a href='#'>
+                <img alt='Dashboard 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bu&#47;BuenosAires-Tpfinal_17345648016950&#47;Dashboard2&#47;1_rss.png' style='border: none' />
+            </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='BuenosAires-Tpfinal_17345648016950&#47;Dashboard2' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bu&#47;BuenosAires-Tpfinal_17345648016950&#47;Dashboard2&#47;1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='es-ES' />
+            <param name='filter' value='publish=yes' />
+        </object>
+    </div>
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1734565267680');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if ( divElement.offsetWidth > 800 ) { 
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else if ( divElement.offsetWidth > 500 ) { 
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else { 
+            vizElement.style.width='100%';
+            vizElement.style.height='1127px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+  
+    <p class="chart-description">Este dashboard interactivo muestra una visión general del listado de AirBnb en Buenos Aires. Incluye métricas clave como precios, tipos de habitaciones, etc.</p>
+
+    <div class="questions">
+      <div class="question-title">Preguntas Clave</div>
+      <ol class="question-list">
+          <li>¿Qué zonas tienen la mayor cantidad de propiedades disponibles?</li>
+          <li>¿Cuál es el precio promedio por noche en diferentes barrios o zonas?</li>
+          <li>Relación entre Número de Reseñas y Precio: Explorar si las propiedades con más reseñas tienden a tener precios más altos o más bajos.</li>
+          <li>Propiedades más Populares por Barrio: Identificar los barrios con propiedades más populares (mayor cantidad de reseñas acumuladas).</li>
+          <li>¿Cuáles son las propiedades más caras y dónde están ubicadas? Identificar las propiedades con el precio más alto y sus ubicaciones geográficas.</li>
+          <li>¿Cómo se distribuyen los precios según el tipo de propiedad? Visualizar la dispersión de precios dentro de cada tipo de propiedad.</li>
+          <li>Top 10 de Host por Tipo.</li>
+      </ol>
+    </div>
+
+
+    <div class='tableauPlaceholder' id='viz1734570934853' style='position: relative'>
+        <noscript>
+            <a href='#'>
+                <img alt='Dashboard 1 ' src='https://public.tableau.com/static/images/Bu/BuenosAires-Tpfinal_Dash1/Dashboard1/1_rss.png' style='border: none' />
+            </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='BuenosAires-Tpfinal_Dash1/Dashboard1' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/Bu/BuenosAires-Tpfinal_Dash1/Dashboard1/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='es-ES' />
+            <param name='filter' value='publish=yes' />
+        </object>
+    </div>
+    <p class="chart-description">Este gráfico muestra el desglose inicial de datos categorizados por barrios y tipos de alojamiento en Buenos Aires.</p>
+
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1734570934853');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if ( divElement.offsetWidth > 800 ) { 
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else if ( divElement.offsetWidth > 500 ) { 
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else { 
+            vizElement.style.width='100%';
+            vizElement.style.height='1227px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+
+    <div class='tableauPlaceholder' id='viz1734573046648' style='position: relative'>
+    <noscript>
+        <a href='#'>
+            <img alt='Dashboard 3' src='https://public.tableau.com/static/images/Bu/BuenosAires-Tpfinal_Dash2/Dashboard3/1_rss.png' style='border: none' />
+        </a>
+    </noscript>
+    <object class='tableauViz' style='display:none;'>
+        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+        <param name='embed_code_version' value='3' />
+        <param name='site_root' value='' />
+        <param name='name' value='BuenosAires-Tpfinal_Dash2/Dashboard3' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='yes' />
+        <param name='static_image' value='https://public.tableau.com/static/images/Bu/BuenosAires-Tpfinal_Dash2/Dashboard3/1.png' />
+        <param name='animate_transition' value='yes' />
+        <param name='display_static_image' value='yes' />
+        <param name='display_spinner' value='yes' />
+        <param name='display_overlay' value='yes' />
+        <param name='display_count' value='yes' />
+        <param name='language' value='es-ES' />
+        <param name='filter' value='publish=yes' />
+    </object>
+</div>
+
+<script type='text/javascript'>
+    var divElement = document.getElementById('viz1734573046648');
+    var vizElement = divElement.getElementsByTagName('object')[0];
+
+    if (divElement.offsetWidth > 800) {
+        vizElement.style.width = '100%';
+        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+    } else if (divElement.offsetWidth > 500) {
+        vizElement.style.width = '100%';
+        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+    } else {
+        vizElement.style.width = '100%';
+        vizElement.style.height = '1127px';
+    }
+
+    var scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+</script>
+
+
+<div class="hallazgos">
+    <div class="hallazgos-title">Hallazgos y Conclusiones Relevantes</div>
+    <div class="hallazgos-item-content">
+        <p>Analizando los datos y gráficos presentados, se pueden extraer las siguientes conclusiones y hallazgos relevantes:</p>
+    </div>
+    
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">1. Zonas con Mayor Cantidad de Propiedades Disponibles</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> Los barrios de Palermo, Recoleta y San Telmo destacan por tener la mayor cantidad de propiedades listadas en Airbnb.<br>
+            <b>Interpretación:</b> Estas áreas son populares entre los anfitriones, posiblemente debido a su atractivo turístico y demanda constante por parte de los visitantes.
+        </div>
+    </div>
+
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">2. Precio Promedio por Noche en Diferentes Barrios</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> Los precios promedio por noche varían significativamente entre barrios. Por ejemplo, Puerto Madero y Recoleta presentan precios más elevados en comparación con La Boca o Constitución.<br>
+            <b>Interpretación:</b> Los barrios con mayor desarrollo económico y atractivo turístico tienden a tener precios más altos, reflejando la disposición de los huéspedes a pagar más por ubicaciones premium.
+        </div>
+    </div>
+
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">3. Relación entre Número de Reseñas y Precio</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> No se observa una correlación directa y fuerte entre el número de reseñas y el precio de las propiedades.<br>
+            <b>Interpretación:</b> El número de reseñas puede estar más relacionado con la duración en la que la propiedad ha estado activa en la plataforma y su tasa de ocupación, más que con su precio.
+        </div>
+    </div>
+
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">4. Propiedades más Populares por Barrio</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> Barrios como Palermo y San Telmo cuentan con propiedades que acumulan un mayor número de reseñas, indicando alta rotación de huéspedes.<br>
+            <b>Interpretación:</b> Estas zonas son preferidas por los turistas, posiblemente debido a su vida nocturna, oferta cultural y gastronómica.
+        </div>
+    </div>
+
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">5. Propiedades más Caras y su Ubicación</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> Las propiedades con los precios más elevados se encuentran predominantemente en Puerto Madero y Recoleta.<br>
+            <b>Interpretación:</b> Estas áreas exclusivas ofrecen alojamientos de lujo, justificando tarifas más altas debido a las comodidades y ubicación privilegiada.
+        </div>
+    </div>
+
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">6. Distribución de Precios según el Tipo de Propiedad</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> Las casas completas presentan una mayor variabilidad y rangos de precios más altos en comparación con habitaciones privadas o compartidas.<br>
+            <b>Interpretación:</b> Los huéspedes están dispuestos a pagar más por la privacidad y comodidad de una propiedad completa, mientras que las habitaciones ofrecen opciones más económicas.
+        </div>
+    </div>
+
+    <div class="hallazgos-item">
+        <div class="hallazgos-item-title">7. Top 10 de Anfitriones por Tipo de Propiedad</div>
+        <div class="hallazgos-item-content">
+            <b>Hallazgo:</b> Algunos anfitriones gestionan múltiples propiedades, especialmente en categorías de casas completas en barrios céntricos.<br>
+            <b>Interpretación:</b> Existe una presencia de anfitriones profesionales o empresas que operan varias propiedades, influyendo en la dinámica del mercado de alquileres a corto plazo.
+        </div>
+    </div>
+</div>
+
+    <div class="conclusions">
+    <div class="conclusions-title">Conclusiones Generales</div>
+    <ul class="conclusions-list">
+        <li>El análisis proporciona una comprensión profunda de la oferta de alojamientos en Buenos Aires, destacando las zonas con mayor disponibilidad, variaciones de precios por barrio y tipo de propiedad, y patrones de popularidad basados en las reseñas de los huéspedes.</li>
+        <li>La identificación de outliers en los precios sugiere la necesidad de un análisis más detallado para comprender las razones detrás de estas discrepancias, como la presencia de propiedades de lujo o posibles errores en los datos.</li>
+        <li>La falta de datos en ciertas columnas, como neighbourhood_group y license, indica áreas donde la calidad del dataset podría mejorarse para futuros análisis.</li>
+    </ul>
+    <div class="conclusions-footer">
+        Este dashboard interactivo sirve como una herramienta valiosa para explorar y visualizar las tendencias de alojamiento en Buenos Aires, facilitando la toma de decisiones informadas para anfitriones, huéspedes y analistas del mercado turístico.
+    </div>
+</div>
+
+</body>
+</html>
